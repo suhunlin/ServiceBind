@@ -20,7 +20,7 @@ public class MyService extends Service {
         isBind = false;
     }
 
-    private class LocalService extends Binder{
+    public class LocalService extends Binder{
         public LocalService(){
             Log.d(tag, "+++++LocalService was born+++++");
         }
@@ -37,10 +37,10 @@ public class MyService extends Service {
     }
 
     @Override
-    public void unbindService(ServiceConnection conn) {
+    public boolean onUnbind(Intent intent) {
         Log.d(tag, "+++++MyService unBind+++++");
         isBind = false;
-        super.unbindService(conn);
+        return super.onUnbind(intent);
     }
 
     public int createLuckyNum(){
